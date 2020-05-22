@@ -10,7 +10,6 @@ class App extends Component {
       <div>
         <DataShow />
         Random users app
-        <button onClick={(e) => { this.fetchNewRandomUsersData(e) }}>Get random users data</button>
       </div>
     )
   }

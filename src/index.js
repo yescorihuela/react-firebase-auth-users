@@ -1,15 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import reduxPromise from 'redux-promise';
-import reducers from 'reducers';
+import Root from 'Root';
 
 import App from './components/App';
 
 ReactDOM.render(
-  <Provider store={createStore(reducers, {})}>
+  <Root>
     <App />
-  </Provider>,
+  </Root>,
   document.querySelector('#root'),
 );
