@@ -1,18 +1,29 @@
 import axios from 'config';
-import { FETCH_USERS } from 'actions/types';
+import {
+  FETCH_USERS,
+  CLEAR_STATE,
+} from 'actions/types';
 
 const apiUrl = process.env.REACT_APP_DATA_ENDPOINT;
 
-export const fetchUsers = async () => {
-
-  const users = await axios.get(apiUrl, {
+export const fetchUsers = async userToken => {
+  const random = parseInt(Math.random() * 123456789)
+  const response = await axios.get(`${apiUrl}?r=${random}`, {
     'headers': {
-      'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InloZXIxMzZAZ21haWwuY29tIiwiZXhwIjoxNTkwMjUxNzg3fQ.2QQjsKXK6JiZmtnk0wiegVmg2hGNyWDpYhlcQE3hT_k'
+      'Authorization': userToken,
     }
   });
   return {
     type: FETCH_USERS,
-    payload: users,
+    payload: response,
+  }
+
+}
+
+export const clearState = () => {
+  return {
+    type: CLEAR_STATE,
+    payload: null,
   }
 }
 

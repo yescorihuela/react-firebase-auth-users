@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Auth from 'components/Auth';
 import DataShow from 'components/DataShow';
+import {
+  useUser,
+} from 'reactfire';
 
-class App extends Component {
-  fetchNewRandomUsersData = (e) => {
-    console.log(e)
-  }
-  render() {
-    return(
-      <div>
-        <DataShow />
-        Random users app
-      </div>
-    )
-  }
+
+export default (props) => {
+  const user = useUser();
+
+  return(
+    <div>
+      { user && <DataShow/> }
+      { !user && <Auth /> }
+    </div>
+  )
 }
-
-export default App;

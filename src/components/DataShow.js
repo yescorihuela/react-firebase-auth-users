@@ -1,29 +1,40 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
+import {
+  useUser,
+} from 'reactfire';
 
+import Auth from 'components/Auth';
 
-class DataShow extends Component {
-  renderData = () => {
-    return this.props.users.map((user, index) => {
+const DataShow = props => {
+  const user = useUser();
+
+  const renderData = () => {
+    return props.users.map((user, index) => {
       return <li key={index}>{user.name.title} {user.name.first} {user.name.last}</li>
-    })
+    });
   }
 
-  render() {
-    return(
-      <div>
-        DataTable <br />
-        <button onClick={this.props.fetchUsers}>Get data</button>
-        <hr />
-        <div>
-          <ul>
-            {this.renderData()}
-          </ul>
-        </div>
-      </div>
-    );
+  const fetchUsersWrapper = () => {
+    const userToken = user.toJSON()['stsTokenManager']['accessToken'];
+    props.fetchUsers(userToken);
   }
+
+  return (
+    <div>
+      DataTable <br />
+      <button onClick={fetchUsersWrapper}>Get data</button>
+      <hr />
+      <div>
+        <ul>
+          {renderData()}
+        </ul>
+      </div>
+      <hr />
+      <Auth />
+    </div>
+  );
 }
 
 const mapStateToProps = state => {
