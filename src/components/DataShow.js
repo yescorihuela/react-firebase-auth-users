@@ -1,5 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import 'antd/dist/antd.css';
+import '../styles/index.css';
+import {
+  Table,
+  Card,
+  Button
+} from 'antd';
+
+import { SearchOutlined } from '@ant-design/icons';
+
 import * as actions from 'actions';
 import {
   useUser,
@@ -7,14 +17,67 @@ import {
 
 import Auth from 'components/Auth';
 
+const tableColumns = [
+  {
+    title: 'Names',
+    dataIndex: 'names',
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+  },
+  {
+    title: 'Email',
+    dataIndex: 'email'
+  },
+  {
+    title: 'Phone',
+    dataIndex: 'phone',
+  }
+];
+
+const renderDetails = record => {
+  return (
+  <Card
+      hoverable
+      style={{ width: 240 }}
+      cover={<img alt="example" src={record.details.picture} />}
+    >
+      <p>Birthday: {record.details.birthday}</p>
+      <p>Gender: {record.details.gender}</p>
+      <p>Timezone offset: {record.details.timezone}</p>
+      <p>Location TZ: {record.details.location}</p>
+    </Card>
+  )
+}
+
+const expandable = { expandedRowRender: record => renderDetails(record)};
+const title = () => 'Users list from randomuser.org';
+const showHeader = true;
+const footer = () => null;
+const pagination = { position: 'bottom' };
+
+const tableConfig = {
+  bordered: false,
+  loading: false,
+  pagination,
+  size: 'default',
+  expandable,
+  title,
+  showHeader,
+  footer,
+  rowSelection: {},
+  scroll: undefined,
+  hasData: true,
+  tableLayout: undefined,
+  top: 'none',
+  bottom: 'bottomRight',
+};
+
+
 const DataShow = props => {
   const user = useUser();
-
-  const renderData = () => {
-    return props.users.map((user, index) => {
-      return <li key={index}>{user.name.title} {user.name.first} {user.name.last}</li>
-    });
-  }
+  const [data, setData] = useState(null);
 
   const fetchUsersWrapper = () => {
     const userToken = user.toJSON()['stsTokenManager']['accessToken'];
@@ -23,16 +86,25 @@ const DataShow = props => {
 
   return (
     <div>
-      DataTable <br />
-      <button onClick={fetchUsersWrapper}>Get data</button>
-      <hr />
       <div>
-        <ul>
-          {renderData()}
-        </ul>
+        <Button
+          type="primary"
+          onClick={fetchUsersWrapper}
+          icon={<SearchOutlined />}
+        >
+          Search and show users
+        </Button> <Auth />
       </div>
       <hr />
-      <Auth />
+      <div>
+        <Table
+          {...tableConfig}
+          pagination={{ position: [tableConfig.top, tableConfig.bottom] }}
+          columns={tableColumns}
+          dataSource={!!props.users ? props.users : null}
+        />
+      </div>
+      <hr />
     </div>
   );
 }

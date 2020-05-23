@@ -6,7 +6,7 @@ import {
 const users = (state = [], action) => {
   switch(action.type) {
     case FETCH_USERS:
-      const users = action.payload.data.map(user => user);
+      const users = action.payload.map(user => user);
       return [...users];
     case CLEAR_STATE:
       return [];

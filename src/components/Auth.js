@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import * as actions from 'actions';
+import 'antd/dist/antd.css';
+import '../styles/index.css';
+import {
+  Button,
+  Tooltip
+} from 'antd';
+import { LockOutlined } from '@ant-design/icons';
 import 'firebase/auth';
 import {
   useFirebaseApp,
   useUser,
 } from 'reactfire';
+
+import * as actions from 'actions';
 
 const Auth = (props) => {
   const [ email, setEmail ] = useState('');
@@ -29,7 +37,7 @@ const Auth = (props) => {
   }
 
   return(
-    <div>
+    <span>
       { !user &&
         <div>
           <div>
@@ -47,12 +55,9 @@ const Auth = (props) => {
         </div>
       }
       {
-        user &&
-        <div>
-          <button onClick={logOut}>Logout</button>
-        </div>
+        user && <Button type="danger" icon={<LockOutlined />} onClick={logOut}>Logout</Button>
       }
-    </div>
+    </span>
   )
 
 }
