@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
 import '../styles/index.css';
 import {
-  Button,
-  Tooltip
+  Form,
+  Input,
+  Button
 } from 'antd';
-import { LockOutlined } from '@ant-design/icons';
+import {
+  LockOutlined,
+  UnlockOutlined
+} from '@ant-design/icons';
 import 'firebase/auth';
 import {
   useFirebaseApp,
@@ -15,20 +19,35 @@ import {
 
 import * as actions from 'actions';
 
+
+const layout = {
+  labelCol: {
+    span: 8,
+  },
+  wrapperCol: {
+    span: 16,
+  },
+};
+const tailLayout = {
+  wrapperCol: {
+    offset: 8,
+    span: 16,
+  },
+};
+
+
 const Auth = (props) => {
-  const [ email, setEmail ] = useState('');
-  const [ password, setPassword ] = useState('');
 
   const user = useUser();
 
   const firebase = useFirebaseApp();
 
-  const signUp = async () => {
-    await firebase.auth().createUserWithEmailAndPassword(email, password);
-  }
-
-  const logIn = async () => {
-    await firebase.auth().signInWithEmailAndPassword(email, password);
+  const logIn = async formValues => {
+    console.log(formValues)
+    await firebase.auth().signInWithEmailAndPassword(
+      formValues.email,
+      formValues.password
+    );
   }
 
   const logOut = async () => {
@@ -39,20 +58,46 @@ const Auth = (props) => {
   return(
     <span>
       { !user &&
-        <div>
-          <div>
-            <label htmlFor="email">Email: </label>
-            <input type="email" id="email" onChange={ (e) => setEmail(e.target.value) }/>
-          </div>
-          <div>
-            <label htmlFor="password">Password: </label>
-            <input type="password" id="password" onChange={ (e) => setPassword(e.target.value) }/>
-          </div>
-          <div>
-            <button onClick={signUp}>Sign Up</button>
-            <button onClick={logIn}>Login</button>
-          </div>
-        </div>
+        <Form
+          {...layout}
+          name="basic"
+          className="login-form"
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={logIn}
+        >
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your email!',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your password!',
+              },
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+          <Form.Item {...tailLayout}>
+            <Button type="primary" htmlType="submit" icon={<UnlockOutlined />}>
+              Login
+            </Button>
+          </Form.Item>
+        </Form>
       }
       {
         user && <Button type="danger" icon={<LockOutlined />} onClick={logOut}>Logout</Button>

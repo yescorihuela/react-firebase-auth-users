@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
 import '../styles/index.css';
@@ -77,7 +77,6 @@ const tableConfig = {
 
 const DataShow = props => {
   const user = useUser();
-  const [data, setData] = useState(null);
 
   const fetchUsersWrapper = () => {
     const userToken = user.toJSON()['stsTokenManager']['accessToken'];
