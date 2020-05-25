@@ -28,6 +28,13 @@ Luego deberá ejecutar el siguiente comando `docker`:
 docker-compose up --build
 ```
 
+### Para interactuar
+
+http://ec2-54-90-19-20.compute-1.amazonaws.com:3001/
+
+usuario: test@gmail.com
+password: 123456
+
 ___
 
 # ¿Qué faltó?
@@ -37,3 +44,4 @@ En este apartado se hacen mención a requerimientos que no fueron satisfechos, l
 - Mensajes de error al usuario sobre peticiones denegadas y/o usuarios inválidos.
 - Quizás incluir un HOC (High-Order Component) que permita a su vez incorporar lógica válida para el redireccionamiento ante la autenticación.
 - Introducir el routing cuando existe un cliente autenticado.
+- El diseño responsive
