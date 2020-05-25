@@ -1,68 +1,45 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ¿Cómo fue diseñado este frontend?
 
-## Available Scripts
+En este frontend, basa su funcionamiento en la librería react en conjunto con redux, esto para el manejo de estados. Así mismo se incorpora la tecnología de Firebase como mecanismo de autenticación, posteriormente ese token se envía con la petición de usuarios en su cabecera (Authorization: ey...). Si ese usuario aunque esté en Firebase, no se encuentra en la base de datos del backend, su petición será rechazada (HTTP 401)
 
-In the project directory, you can run:
+Las tecnologías utilizadas:
 
-### `yarn start`
+- React 16.13.1
+- Redux 4.0.5
+- Antd 4.2.4 para la interfaz gráfica
+- Google Firebase
+- Docker y docker-compose
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```bash
+git clone https://github.com/yescorihuela/react-firebase-auth-users.git
+```
 
-### `yarn test`
+Posterior al clonado de repositorio, deberá entrar al directorio del repositorio descargado:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+cd react-firebase-auth-users
+```
 
-### `yarn build`
+Luego deberá ejecutar el siguiente comando `docker`:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+docker-compose up --build
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Levantar el frontend
 
-### `yarn eject`
+Para hacerlo, dado a que se encuentra dockerizado el proyecto, es necesario ejecutar 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+___
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# ¿Qué faltó?
+En este apartado se hacen mención a requerimientos que no fueron satisfechos, la razón es darle mayor transparencia al proceso llevado a cabo.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Testing de componentes, a pesar de que están instaladas las librerías jest, enzyme y moxios para las simular las peticiones.
+- Mensajes de error al usuario sobre peticiones denegadas y/o usuarios inválidos.
+- Quizás incluir un HOC (High-Order Component) que permita a su vez incorporar lógica válida para el redireccionamiento ante la autenticación.
+- Introducir el routing cuando existe un cliente autenticado.
