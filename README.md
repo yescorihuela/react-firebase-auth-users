@@ -28,12 +28,6 @@ Luego deberá ejecutar el siguiente comando `docker`:
 docker-compose up --build
 ```
 
----
-
-# Levantar el frontend
-
-Para hacerlo, dado a que se encuentra dockerizado el proyecto, es necesario ejecutar 
-
 ___
 
 # ¿Qué faltó?

@@ -2,8 +2,8 @@ version: '3.7'
 services:
   app_frontend:
     container_name: app_frontend
-    environment:
-      - HTTP_URL=http://ec2-3-86-166-95.compute-1.amazonaws.com:4001
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: docker/Dockerfile.frontend
@@ -11,4 +11,4 @@ services:
       - '.:/app'
       - '/app/node_modules'
     ports:
-      - '8082:8080'
+      - '3001:3001'
