@@ -30,7 +30,7 @@ docker-compose up --build
 
 ### Para interactuar
 
-http://ec2-54-90-19-20.compute-1.amazonaws.com:3001/
+http://ec2-54-237-40-148.compute-1.amazonaws.com:3001/
 
 usuario: test@gmail.com
 password: 123456
