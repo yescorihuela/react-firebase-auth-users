@@ -11,19 +11,18 @@ const initialState = {
 }
 
 const users = (state = initialState, action) => {
+
   switch(action.type) {
     case FETCH_USERS:
-      const users = action.payload.map(user => user);
-      return { users, fetching: true };
+      return { ...state, fetching: true };
     case FETCH_USERS_SUCCESS:
-      return {...state, fetching: false};
-
+      return {...state, users: action.payload.users, fetching: false};
     case FETCH_USERS_ERROR:
-      return {...state, fetching: false};
+      return {...state, fetching: false, error: action.payload};
     case CLEAR_STATE:
-      return {...initialState};
+      return initialState;
     default:
-      return {...initialState};
+      return initialState;
   }
 }
 

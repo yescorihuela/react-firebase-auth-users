@@ -1,4 +1,6 @@
-export const FETCH_USERS = 'fetch_users';
-export const FETCH_USERS_SUCCESS = 'fetch_users_success';
-export const FETCH_USERS_ERROR = 'fetch_users_error';
-export const CLEAR_STATE = 'clear_state';
+export const FETCH_USERS = 'FETCH_USERS';
+export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
+export const FETCH_USERS_ERROR = 'FETCH_USERS_ERROR';
+export const CLEAR_STATE = 'CLEAR_STATE';
+export const LOG_IN = 'LOG_IN';
+export const LOG_OUT = 'LOG_OUT';

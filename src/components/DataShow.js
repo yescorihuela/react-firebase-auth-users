@@ -75,14 +75,13 @@ const tableConfig = {
 };
 
 
-const DataShow = props => {
+const DataShow = ({users, fetching, fetchUsers}) => {
   const user = useUser();
 
   const fetchUsersWrapper = () => {
     const userToken = user.toJSON()['stsTokenManager']['accessToken'];
-    props.fetchUsers(userToken);
+    fetchUsers(userToken);
   }
-
   return (
     <div>
       <div>
@@ -90,6 +89,7 @@ const DataShow = props => {
           type="primary"
           onClick={fetchUsersWrapper}
           icon={<SearchOutlined />}
+          loading={fetching}
         >
           Search and show users
         </Button> <Auth />
@@ -100,7 +100,7 @@ const DataShow = props => {
           {...tableConfig}
           pagination={{ position: [tableConfig.top, tableConfig.bottom] }}
           columns={tableColumns}
-          dataSource={!!props.users ? props.users : null}
+          dataSource={!!users ? users : null}
         />
       </div>
       <hr />
@@ -109,7 +109,8 @@ const DataShow = props => {
 }
 
 const mapStateToProps = state => {
-  return {users: state.users};
+  const { users, fetching } = state.users;
+  return {users, fetching };
 }
 
 export default connect(mapStateToProps, actions)(DataShow);

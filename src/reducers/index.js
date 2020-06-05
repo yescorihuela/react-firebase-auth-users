@@ -6,7 +6,6 @@ const rootReducer = combineReducers({
   users: usersReducer,
 });
 
-
 export default () => {
   const store = createStore(
     rootReducer,
