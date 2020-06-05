@@ -2,6 +2,8 @@ import axios from 'config';
 import moment from 'moment';
 import {
   FETCH_USERS,
+  FETCH_USERS_ERROR,
+  FETCH_USERS_SUCCESS,
   CLEAR_STATE,
 } from 'actions/types';
 
