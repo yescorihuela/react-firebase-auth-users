@@ -51,9 +51,10 @@ export const fetchUsers = userToken => (dispatch) => {
       payload: {users: data, fetching: false}
     });
   }).catch(err => {
+    console.log(err);
     dispatch({
       type: FETCH_USERS_ERROR,
-      payload: err.response.message
+      payload: err,
     });
   });
 }
