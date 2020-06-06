@@ -43,10 +43,6 @@ const Auth = (props) => {
   const history = useHistory();
   const firebase = useFirebaseApp();
 
-  useEffect(() => {
-    if ( user ) history.push('/datashow');
-  })
-
   const logIn = async formValues => {
     
     await firebase.auth().signInWithEmailAndPassword(
