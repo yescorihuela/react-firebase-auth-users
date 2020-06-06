@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import '../styles/index.css';
 import {
@@ -39,11 +40,15 @@ const tailLayout = {
 const Auth = (props) => {
 
   const user = useUser();
-
+  const history = useHistory();
   const firebase = useFirebaseApp();
 
+  useEffect(() => {
+    if(user) history.push('/datashow');
+  })
+
   const logIn = async formValues => {
-    console.log(formValues)
+    
     await firebase.auth().signInWithEmailAndPassword(
       formValues.email,
       formValues.password
@@ -53,6 +58,7 @@ const Auth = (props) => {
   const logOut = async () => {
     props.clearState();
     await firebase.auth().signOut();
+    history.push('/login');
   }
 
   return(
