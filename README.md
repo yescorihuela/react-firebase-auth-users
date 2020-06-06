@@ -42,6 +42,4 @@ En este apartado se hacen mención a requerimientos que no fueron satisfechos, l
 
 - Testing de componentes, a pesar de que están instaladas las librerías jest, enzyme y moxios para las simular las peticiones.
 - Mensajes de error al usuario sobre peticiones denegadas y/o usuarios inválidos.
-- Quizás incluir un HOC (High-Order Component) que permita a su vez incorporar lógica válida para el redireccionamiento ante la autenticación.
-- Introducir el routing cuando existe un cliente autenticado.
 - El diseño responsive
