@@ -7,12 +7,12 @@ import {
 } from 'reactfire';
 
 export default function Routes() {
-    const userData = useUser();
+    const user = useUser();
     const history = useHistory();
-    
+  
     useEffect(() => {
-        if(!userData) history.push('/login');
-    });
+      user ? history.push('/datashow') : history.push('/login');
+    })    
     return (
         <Switch>
             <Route exact path='/datashow' component={DataShow} />

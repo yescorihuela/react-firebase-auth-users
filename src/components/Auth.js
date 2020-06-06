@@ -44,7 +44,7 @@ const Auth = (props) => {
   const firebase = useFirebaseApp();
 
   useEffect(() => {
-    if(user) history.push('/datashow');
+    if ( user ) history.push('/datashow');
   })
 
   const logIn = async formValues => {
@@ -58,7 +58,6 @@ const Auth = (props) => {
   const logOut = async () => {
     props.clearState();
     await firebase.auth().signOut();
-    history.push('/login');
   }
 
   return(
